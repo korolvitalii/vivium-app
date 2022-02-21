@@ -1,16 +1,23 @@
 import styled from 'styled-components';
+import img from '../../assets/images/image-1.jpg';
 
 export const Wrapper = styled.div`
-  background: #dddce1;
+  background-color: #2b93b3;
+  background-image: url(${img});
+  background-blend-mode: normal;
+  background-size: cover;
+  background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  width: 100%;
   .container {
-    width: 80%;
-    max-width: 500px;
-    min-width: 200px;
-    min-height: 200px;
+    width: 90%;
+    max-width: 30em;
+    min-width: 20em;
+    min-height: 20em;
+    height: 25em;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -32,7 +39,7 @@ export const Wrapper = styled.div`
     width: 35px;
     height: 35px;
     color: #2b93b3;
-    border-radius: 20px;
+    border-radius: 1rem;
   }
   .button-group-button {
     border-style: none;
