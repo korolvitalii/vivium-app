@@ -13,6 +13,7 @@ export interface IBook {
   group: string;
   name: string;
   testament: string;
+  timestamp: string;
 }
 
 export interface IUser {
