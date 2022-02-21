@@ -23,7 +23,7 @@ export const userReducer = (state = initialState, action: UserActions): InitialS
       return { ...state, status: action.payload };
     }
     case UserActionsType.LOG_OUT: {
-      return { ...state, data: undefined, status: LoadingStatus.NEVER };
+      return { ...state, data: undefined, status: LoadingStatus.LOADING };
     }
     default:
       return state;
