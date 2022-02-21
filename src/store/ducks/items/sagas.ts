@@ -9,6 +9,7 @@ export function* fetchItemsRequest() {
     yield put(setLoadingStatus(LoadingStatus.LOADING));
     const data: IBook[] = yield call(ItemsApi.fetchItems);
     yield put(setItems(data));
+    yield put(setLoadingStatus(LoadingStatus.LOADED));
   } catch (error) {
     yield put(setLoadingStatus(LoadingStatus.ERROR));
   }

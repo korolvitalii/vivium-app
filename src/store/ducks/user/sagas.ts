@@ -29,7 +29,19 @@ export function* authMeRequest({ payload }: any) {
   }
 }
 
+export function* logOutRequest() {
+  try {
+    yield put(setLoadingStatus(LoadingStatus.LOADING));
+    window.localStorage.removeItem('Authorization');
+    window.localStorage.removeItem('email');
+    yield put(setLoadingStatus(LoadingStatus.LOADED));
+  } catch (error) {
+    yield put(setLoadingStatus(LoadingStatus.ERROR));
+  }
+}
+
 export function* userSaga() {
   yield takeEvery(UserActionsType.FETCH_SIGN_IN, fetchSignInRequest);
   yield takeEvery(UserActionsType.AUTH_ME, authMeRequest);
+  yield takeEvery(UserActionsType.LOG_OUT, logOutRequest);
 }
