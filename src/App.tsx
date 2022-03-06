@@ -1,26 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
+import Home from './pages/Home';
+import SignIn from './pages/SignIn';
+import { fetchItems } from './store/ducks/items/actionCreators';
+import { authMe, setLoadingStatus } from './store/ducks/user/actionCreators';
+import { selectErrors, selectIsAuth, selectUserLoadingStatus } from './store/ducks/user/selectors';
+import { LoadingStatus } from './store/types';
+import { Centered, LoadingProgress } from './styles';
 
-function App() {
+const App: React.FC = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const loadingStatus = useSelector(selectUserLoadingStatus);
+  const isReady = loadingStatus !== LoadingStatus.NEVER && loadingStatus !== LoadingStatus.LOADING;
+  const isAuth = useSelector(selectIsAuth);
+
+  useEffect(() => {
+    const email = window.localStorage.getItem('email');
+    if (email) {
+      dispatch(authMe(email));
+    } else {
+      dispatch(setLoadingStatus(LoadingStatus.LOADED));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (isReady && !isAuth) {
+      navigate('/sign-in');
+    } else {
+      navigate('/');
+    }
+  }, [isAuth, isReady]);
+
+  if (!isReady) {
+    return (
+      <Centered>
+        <LoadingProgress />
+      </Centered>
+    );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path='/sign-in' element={<SignIn />} />
+      <Route path='/' element={<Home />} />
+    </Routes>
   );
-}
+};
 
 export default App;

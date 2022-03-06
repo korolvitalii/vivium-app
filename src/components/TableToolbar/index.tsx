@@ -71,31 +71,16 @@ const EnhancedTableToolbar: React.FC<ITableToolbarProps> = ({
           />
         </LocalizationProvider>
         <FormControl className='select-input'>
-          <InputLabel id='demo-simple-select-label'>Group</InputLabel>
-          <Select
-            labelId='demo-simple-select-label'
-            id='demo-simple-select'
-            value={group}
-            label='Group'
-            onChange={handleChangeFilterBy('group')}>
+          <InputLabel>Group</InputLabel>
+          <Select value={group} label='Group' onChange={handleChangeFilterBy('group')}>
             <MenuItem value='Históricos'>Históricos</MenuItem>
             <MenuItem value='Poéticos'>Poéticos</MenuItem>
             <MenuItem value='Profetas maiores'>Profetas maiores</MenuItem>
             <MenuItem value='All'>All</MenuItem>
           </Select>
         </FormControl>
-        <TextField
-          id='standard-basic'
-          label='Name'
-          variant='standard'
-          onChange={handleChangeFilterBy('name')}
-        />
-        <TextField
-          id='standard-basic'
-          label='Author'
-          variant='standard'
-          onChange={handleChangeFilterBy('author')}
-        />
+        <TextField label='Name' variant='standard' onChange={handleChangeFilterBy('name')} />
+        <TextField label='Author' variant='standard' onChange={handleChangeFilterBy('author')} />
       </Toolbar>
     </Wrapper>
   );

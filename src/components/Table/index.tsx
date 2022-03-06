@@ -41,7 +41,6 @@ const EnhancedTable: React.FC = () => {
 
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('author');
-  const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -72,17 +71,6 @@ const EnhancedTable: React.FC = () => {
     setOrderBy(property);
   };
 
-  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      if (rows) {
-        const newSelecteds = rows.map((n) => n.name);
-        setSelected(newSelecteds);
-        return;
-      }
-    }
-    setSelected([]);
-  };
-
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -101,21 +89,21 @@ const EnhancedTable: React.FC = () => {
         setEndTime={setEndTime}
         startTime={startTime}
         endTime={endTime}
-        numSelected={selected.length}
+        numSelected={0}
         setFilterBy={setFilterBy}
         setFilterValue={setFilterValue}
       />
       <TableContainer>
         <Table className='table' aria-labelledby='tableTitle' size='medium'>
           <TableHeader
-            numSelected={selected.length}
+            numSelected={0}
             order={order}
             orderBy={orderBy}
-            onSelectAllClick={handleSelectAllClick}
+            onSelectAllClick={() => {}}
             onRequestSort={handleRequestSort}
             rowCount={rows?.length || 0}
           />
-          <TableBody>
+          <TableBody data-testid='table-body'>
             {isLoading &&
               skeletonArray.map((item, index) => (
                 <StyledTableRow key={index}>
@@ -147,7 +135,7 @@ const EnhancedTable: React.FC = () => {
                     return (
                       <TableRow
                         hover
-                        role='checkbox'
+                        data-testid='table-row'
                         aria-checked={undefined}
                         tabIndex={-1}
                         key={row.name}
