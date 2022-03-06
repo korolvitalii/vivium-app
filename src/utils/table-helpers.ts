@@ -47,7 +47,7 @@ export const compareDates = (
     if (milisecondsStartTime && milisecondsEndTime) {
       return milisecondsStartTime < milisecondsItemDate && milisecondsItemDate < milisecondsEndTime;
     }
-    return;
+    return false;
   });
   return filtered;
 };

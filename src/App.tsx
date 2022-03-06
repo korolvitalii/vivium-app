@@ -4,9 +4,8 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import SignIn from './pages/SignIn';
-import { fetchItems } from './store/ducks/items/actionCreators';
 import { authMe, setLoadingStatus } from './store/ducks/user/actionCreators';
-import { selectErrors, selectIsAuth, selectUserLoadingStatus } from './store/ducks/user/selectors';
+import { selectIsAuth, selectUserLoadingStatus } from './store/ducks/user/selectors';
 import { LoadingStatus } from './store/types';
 import { Centered, LoadingProgress } from './styles';
 

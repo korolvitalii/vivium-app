@@ -1,4 +1,4 @@
-import { Alert, Button, ButtonGroup, Icon, Snackbar, Stack, Typography } from '@mui/material';
+import { Alert, Button, ButtonGroup, Snackbar, Stack, Typography } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { Wrapper } from './styles';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
